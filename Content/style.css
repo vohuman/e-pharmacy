@@ -1,4 +1,4 @@
-﻿/* Base */
+/* Base */
 body {
     line-height: 1.7;
     color: #8c92a0;
@@ -1734,7 +1734,7 @@ div.py-3 {
 }
 
     .teammember .member1 {
-        background: url('images/خانم-عباسی.jpg') !important;
+        background: url('images/person_1.jpg') !important;
         margin-left: auto;
         margin-right: auto;
         background-size: cover !important;
@@ -1747,7 +1747,7 @@ div.py-3 {
     }
 
     .teammember .member2 {
-        background: url('images/یحیی-عباسی.jpg') !important;
+        background: url('images/person_2.jpg') !important;
         margin-left: auto;
         margin-right: auto;
         background-size: cover !important;
@@ -1760,7 +1760,7 @@ div.py-3 {
     }
 
     .teammember .member3 {
-        background: url('images/Masoud-Abbasi-1-1.jpg') !important;
+        background: url('images/person_3.jpg') !important;
         margin-left: auto;
         margin-right: auto;
         background-size: cover !important;
@@ -1773,7 +1773,7 @@ div.py-3 {
     }
 
     .teammember .member4 {
-        background: url('images/Amir-Taslimi2-1.png') !important;
+        background: url('images/person_4.jpg') !important;
         margin-left: auto;
         margin-right: auto;
         background-size: cover !important;
