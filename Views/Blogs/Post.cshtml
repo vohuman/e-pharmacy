@@ -1,0 +1,35 @@
+﻿@model DrYahya.Models.Data.Blog
+@{
+    string t = Model.Title;
+    ViewBag.Title = t;
+}
+
+<style>
+    td p{
+        color:#666;
+    }
+</style>
+
+<div class="container" style="padding-top:20px; line-height:200%; padding-bottom:20px;">
+    <h2 class="text-center" style="padding-bottom:10px; line-height:200%;">@Model.Title</h2>
+    <br />
+    <div style="line-height:250%; padding-bottom:20px;">
+        @Html.Raw(Model.BlogContent)
+    </div>
+</div>
+
+@section Scripts{
+    
+    <script>
+        $("strong").addClass("font-weight-bold");
+        $("strong").addClass("text-black");
+        $("h1").addClass("text-black");
+        $("h2").addClass("text-black");
+        $("h3").addClass("text-black");
+        $("h4").addClass("text-black");
+        $("h5").addClass("text-black");
+        $("h3").addClass("font-weight-bold");
+        $("h4").addClass("font-weight-bold");
+        $("h5").addClass("font-weight-bold");
+    </script>
+    }

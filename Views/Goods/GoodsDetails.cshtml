@@ -1,0 +1,151 @@
+﻿@model DrYahya.Models.Data.OrderItem
+
+@{
+    ViewBag.Title = "Product details";
+}
+
+<style>
+    table {
+        border: 1px solid #eee;
+    }
+</style>
+
+@Html.HiddenFor(m => m.ProductId)
+
+<div class="py-3">
+    <div class="container">
+        <div class="row text-left">
+            <div class="col-md-12 mb-0">
+                <div class="col-md-12 mb-0">
+                    @Html.ActionLink("Home", "Index", "Home") <span class="mx-2 mb-0">\</span> @Html.ActionLink("Shopping", "Shopping", "Orders")
+                    <span class="mx-2 mb-0">\</span> @Html.ActionLink(Model.Product.Category.CatName, "ShoppingByCategory", "Orders", new { id = Model.Product.CatId }, null)<span class="mx-2 mb-0">\</span> <strong class="text-black"> @Model.Product.LatinName </strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="site-section">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6 text-left">
+                <div class="text-center">
+                    <h2 class="text-black text-center" style="padding-bottom:10px;">@Model.Product.LatinName</h2>
+
+                    @if (Model.Product.CatId > 1)
+                    {
+                        <p style="padding-top:10px;">
+                            <strong class="h4 text-center" style="color:#ed1e24;"> € @Model.Product.Price.ToString("N2")</strong>
+                        </p>
+                    }
+                </div>
+                <br />
+                @if (Model.Product.CatId > 1)
+                {
+                    <div class="mb-5 text-center">
+                        <div class="input-group mb-3 text-center" style="max-width: 220px; direction:ltr;">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                            </div>
+                            <input type="text" name="Quantity" id="Quantity" class="form-control text-center" value="@Model.Quantity" placeholder=""
+                                   aria-label="Example text with button addon" aria-describedby="button-addon1" min="0">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <p><button id="addToCart" name="addToCart" class="buy-now btn btn-sm height-auto px-4 py-3" style="width: 220px; font-size:18px; background-color:#ed1e24; color:#fff;">Add to cart</button></p>
+                }
+                <div class="mt-5">
+                    <ul class="nav nav-pills mb-3 custom-pill text-center" id="pills-tab" role="tablist" style="color:#fff; margin-right: 75px;">
+
+                        <li class="nav-item" style="color:#fff;">
+                            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+                               aria-controls="pills-home" aria-selected="true" style="color:#fff;">Description</a>
+                        </li>
+
+                        <li class="nav-item" style="color:#fff;">
+                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+                               aria-controls="pills-profile" aria-selected="false" style="color:#fff;">Features</a>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content text-center" id="pills-tabContent">
+
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <table class="table custom-table" style="background-color: #fcfcff;">
+                                <thead>
+                                    <tr>
+                                        @*<th>مواد سازنده</th>*@
+                                        <th>Description</th>
+                                        <th>Unit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        @*<th scope="row">OTC022401</th>*@
+                                        <td>@Model.Product.Description</td>
+                                        <td>@Model.Product.Unit.UnitName</td>
+                                    </tr>
+                                    @*<tr>
+                                    <th scope="row">OTC022401</th>
+                                    <td>Pain Management: Acetaminophen PM Extra-Strength Caplets, 500 mg, 100/Bottle</td>
+                                    <td>144/CS</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">OTC022401</th>
+                                    <td>Pain Management: Acetaminophen PM Extra-Strength Caplets, 500 mg, 100/Bottle</td>
+                                    <td>1 EA</td>
+                                </tr>*@
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+
+
+                            @*<table class="table custom-table bg-white">
+
+                            <tbody>
+                                <tr>
+                                    <td>HPIS CODE</td>
+                                    <td class="bg-light">999_200_40_0</td>
+                                </tr>
+                                <tr>
+                                    <td>HEALTHCARE PROVIDERS ONLY</td>
+                                    <td class="bg-light">No</td>
+                                </tr>
+                                <tr>
+                                    <td>LATEX FREE</td>
+                                    <td class="bg-light">Yes, No</td>
+                                </tr>
+                                <tr>
+                                    <td>MEDICATION ROUTE</td>
+                                    <td class="bg-light">Topical</td>
+                                </tr>
+                            </tbody>
+                        </table>*@
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-5 mr-auto">
+                <div class="border text-center" style="padding:25px; border-radius:10px; background-color: #fcfcff;">
+                    <img src="~/Content/images/@Model.Product.PicAddress" alt="@Model.Product.LatinName" class="img-fluid p-5" style="border-radius:5px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+}

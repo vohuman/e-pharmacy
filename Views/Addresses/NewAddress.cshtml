@@ -1,0 +1,50 @@
+﻿@model DrYahya.Models.Data.Address
+
+@{
+    ViewBag.Title = "New address for " + ViewBag.CustomerName;
+}
+
+<div class="site-section col-12">
+    <div class="col-3">
+
+    </div>
+    <div class="container col-9 text-left" style="margin-right:25%; font-size:120%;">
+        <h3 style="margin-right:-8%;">@ViewBag.Title</h3>
+        <br />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <div>
+                    <input type="hidden" value="@Model.CustomerId" name="CustomerId" id="CustomerId" />
+                </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.Label("Address:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.AddressContent, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.AddressContent, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Potal Code:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.PostCode, new { htmlAttributes = new { @class = "form-control", dir = "ltr" } })
+                        @Html.ValidationMessageFor(model => model.PostCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10 text-center">
+                        <input type="submit" value="Add" class="btn btn-outline-primary col-md-6" />
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

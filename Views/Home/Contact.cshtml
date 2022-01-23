@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Contact Us";
+}
+
+<h2 class="text-left" style="padding:10px; padding-right:60px; color:#333; border-top:1px dashed #aaf; border-bottom:1px dashed #aaf; background-color:#fafafc;">@ViewBag.Title</h2>
+
+<div class="row col-12" style="border-bottom:1px dashed #ba181e; width:100%; padding:10px;">
+    <div class="col-lg-4">
+
+        <div class="text-left" style="padding:15px; color:#444;">
+           
+            <div class="text-left" style="direction:ltr;">
+                <b dir="ltr" style="padding-left:10px; color:#666;">Address:</b>
+                
+                @*<i class="fa fa-map-marker " style="color:#111; padding-left:7px;"></i>*@
+                <a href="@Html.Raw(@"https://www.google.com/maps/place/Dr.+Abbasi+Pharmacy/@32.6310277,51.6753155,15z/data=!4m12!1m6!3m5!1s0x0:0xfcd18d94c5c2f5c3!2sDr.+Abbasi+Pharmacy!8m2!3d32.6310277!4d51.6753155!3m4!1s0x0:0xfcd18d94c5c2f5c3!8m2!3d32.6310277!4d51.6753155")"
+                   target="_blank"><span class="text text-left">Dr. Abbasi Pharmacy, Sheikh Sadough St., Sheikh Mofid St., Esfahan, Iran</span></a>
+            </div>
+            <br />
+            <div class="text-justify">
+
+                <b dir="ltr" style="padding-left:10px; color:#666;">Phone:</b>
+
+                @*<i class="fa fa-phone" style="color:#111; padding-left:7px;"></i>*@
+                <a href="tel:+983136637970" dir="ltr" style="direction:ltr;" class="text-left">+98 31 36637970</a>
+
+            </div> 
+            <br />
+            <div class="text-justify" style="direction:ltr;">
+
+                <b dir="ltr" style="padding-left:10px; color:#666;">E-mail:</b>
+
+                @*<i class="fa fa-envelope" style="color:#111; padding-left:7px;"></i>*@
+                <a href="mailto:info@DrYahya.com" dir="ltr" style="text-align:left; direction:ltr;">info@DrYahya.com</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8">
+        <div style="margin:0px; padding:0px;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13440.269725435444!2d51.6753155!3d32.6310277!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xfcd18d94c5c2f5c3!2sDr.%20Abbasi%20Pharmacy!5e0!3m2!1sen!2s!4v1588014064536!5m2!1sen!2s" frameborder="0" style="border:0; height:400px; width:100%; margin-top: 15px; margin-bottom: 15px;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        </div>
+    </div>
+
+
+</div>

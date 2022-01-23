@@ -1,0 +1,100 @@
+﻿@using DrYahya.Models
+@model DrYahya.Models.Data.Customer
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mb-0">
+                <div class="row text-left">
+                    <div class="col-md-12 mb-0">@Html.ActionLink("Home", "Index", "Home") <span class="mx-2 mb-0">\</span> <strong>Register</strong></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row container">
+    <div class="col-4"></div>
+    <div class=" col-8 text-left">
+
+        @using (Html.BeginForm("NewClient", "Clients", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @*<h2 class="h3 mb-3 text-black">سفارش شما</h2>*@
+            <div class="p-3 p-lg-5 col-lg-12">
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label for="FName" class="text-black">First Name <span class="text-danger">*</span></label>
+                        @*<input type="text" class="form-control" id="c_fname" name="c_fname">*@
+                        @Html.EditorFor(model => model.FName, new { htmlAttributes = new { @class = "form-control text-center" } })
+                        @Html.ValidationMessageFor(model => model.FName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6">
+                        <label for="LName" class="text-black">Last Name <span class="text-danger">*</span></label>
+                        @*<input type="text" class="form-control" id="c_lname" name="c_lname">*@
+                        @Html.EditorFor(model => model.LName, new { htmlAttributes = new { @class = "form-control text-center" } })
+                        @Html.ValidationMessageFor(model => model.LName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label for="Email" class="text-black">E-mail <span class="text-danger">*</span></label>
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control text-center", placeholder = "E-mail", @dir = "ltr" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Phone" class="text-black">Phone <span class="text-danger">*</span></label>
+                        @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control text-center", placeholder = "Phone", @dir = "ltr", @value = "" } })
+                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <label for="Password" class="text-black">Pasword  <span class="text-danger">*</span></label>
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @dir = "ltr" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <label for="Password" class="text-black">Confirm Password  <span class="text-danger">*</span></label>
+                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", @dir = "ltr" } })
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="row col-lg-4">
+
+                    </div>
+                    <div class="row col-lg-6">
+                        <button type="submit" class="form-control btn btn-outline-primary">Register</button>
+                        @if (TempData["UserMessage"] != null)
+                        {
+                            var message = (MessageVM)TempData["UserMessage"];
+                            <p class="alert @message.CssClassName" id="userMessage" style="margin-top:50px;">
+                                @message.Message
+                                <b class="close float-left" id="userMessagebtn" style="cursor:pointer;">&times;</b>
+                            </p>
+                        }
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,191 @@
+﻿@using DrYahya.Models.Data
+@model DrYahya.Models.Data.Customer
+@{
+    ViewBag.Title = "ثبت نام / ورود";
+    bool login = (bool)ViewBag.login;
+    Order order = (Order)ViewData["order"];
+}
+
+@if (login == true)
+{
+
+    ViewBag.Title = Model.FName + " " + Model.LName;
+}
+
+<div class="py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mb-0">
+                <div class="row text-right">
+                    <div class="col-md-12 mb-0">@Html.ActionLink("صفحه اصلی", "Index", "Home") <span class="mx-2 mb-0">/</span> <strong>تکمیل خرید</strong></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="site-section">
+
+    <div class="container">
+        @if (login == false)
+        {
+            <div class="row mb-5">
+                <div class="col-md-12 py-3 text-right">
+                    <div class="rounded p-3" style="background-color:#fff;">
+                        <p class="mb-0">مشتری سابق هستید؟ برای ورود  <a href="/Clients/Login" class="d-inline-block">اینجا را کلیک کنید</a></p>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="row text-right">
+            <div class="col-md-6">
+                <h2 class="h3 mb-3 text-black text-center">جزییات صورتحساب</h2>
+                <div class="p-3 p-lg-5 border">
+                    <table class="table site-block-order-table mb-5 text-center">
+                        <thead class="text-center border" style="background-color:#fff;">
+                            <tr class="font-weight-bolder">
+                                <th>کالا</th>
+                                <th>تعداد</th>
+                                <th>مجموع قیمت</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                long total = 0;
+                            }
+                            @foreach (var item in order.OrderItems)
+                            {
+                                <tr style="color:#666;" class="border">
+                                    <td>
+                                        @item.Product.PersianName
+                                    </td>
+                                    <td>
+                                        @(((int)(item.Quantity)).ToString("N0"))
+                                    </td>
+                                    <td>
+                                        @(((long)(item.Price)).ToString("N0"))
+                                    </td>
+                                </tr>
+
+                                total += (long)item.Price;
+
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th></th>
+                                <th colspan="1">مجموع قیمت : </th>
+                                <th colspan="1">@total.ToString("N0")</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+
+                    @*<div class="form-group">
+                            <label for="c_order_notes" class="text-black">توضیحات سفارش</label>
+
+                            <textarea name="c_order_notes" id="c_order_notes" cols="30" rows="15" class="form-control"
+                                      placeholder="اینجا توضیحات مورد نظر را بنویسید..."></textarea>
+                        </div>*@
+
+                    @if (login == true)
+                    {
+                        <div>
+                            <a class="btn btn-primary btn-lg btn-block" style="padding:2%;" href="/Clients/ChooseAddress">
+                                انتخاب آدرس
+                            </a>
+                        </div>
+                    }
+
+                </div>
+            </div>
+            <div class="col-6">
+                @if (login == false)
+                {
+                    <h2 class="h3 mb-3 text-black text-center">ثبت نام</h2>
+                }
+
+                @if (login == false)
+                {
+                    <div class="col-md-12">
+                        <div class="row mb-8">
+                            @using (Html.BeginForm("NewClient", "Clients", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="col-lg-12">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @*<h2 class="h3 mb-3 text-black">سفارش شما</h2>*@
+                                    <div class="p-3 p-lg-5 border col-lg-12">
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <label for="FName" class="text-black">نام <span class="text-danger">*</span></label>
+                                                @*<input type="text" class="form-control" id="c_fname" name="c_fname">*@
+                                                @Html.EditorFor(model => model.FName, new { htmlAttributes = new { @class = "form-control text-center" } })
+                                                @Html.ValidationMessageFor(model => model.FName, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="LName" class="text-black">نام خانوادگی <span class="text-danger">*</span></label>
+                                                @*<input type="text" class="form-control" id="c_lname" name="c_lname">*@
+                                                @Html.EditorFor(model => model.LName, new { htmlAttributes = new { @class = "form-control text-center" } })
+                                                @Html.ValidationMessageFor(model => model.LName, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <label for="Phone" class="text-black">موبایل <span class="text-danger">*</span></label>
+                                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control text-center", placeholder = "شماره تلفن همراه", @dir = "ltr", @value = "" } })
+                                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <label for="Password" class="text-black">گذرواژه  <span class="text-danger">*</span></label>
+                                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @dir = "ltr" } })
+                                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <label for="Password" class="text-black">تکرار گذرواژه  <span class="text-danger">*</span></label>
+                                                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", @dir = "ltr" } })
+                                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row col-lg-6">
+
+                                            <button type="submit" class="form-control btn btn-outline-primary">تایید</button>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="collapse" id="create_an_account">
+                                                <div class="py-2">
+
+                                                    <div class="form-group">
+                                                        <label for="c_account_password" class="text-black">گذرواژه</label>
+                                                        @*<input type="email" class="form-control" id="c_account_password" name="c_account_password"
+                                                            placeholder="">*@
+                                                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", @dir = "ltr" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                }
+            </div>
+
+
+        </div>
+        <!-- </form> -->
+    </div>
+</div>

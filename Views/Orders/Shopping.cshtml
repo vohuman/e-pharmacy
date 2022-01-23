@@ -1,0 +1,88 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<DrYahya.Models.Data.Product>
+
+@{
+
+    ViewBag.Title = "Store";
+}
+
+<div class="py-3">
+    <div class="container">
+        <div class="row text-left">
+            <div class="col-md-12 mb-0">@Html.ActionLink("Home", "Index", "Home") <span class="mx-2 mb-0">\</span> <strong>Store</strong></div>
+        </div>
+    </div>
+</div>
+<div class="site-section">
+    <div class="container" dir="ltr">
+
+        <div class="row">
+            @*<div class="col-lg-9">
+                <form method="post">
+                    <h3 class="mb-3 h6 text-uppercase text-black d-block text-center">فیلتر بر اساس قیمت</h3>
+                    <div id="slider-range" class="border-primary text-right"></div>
+                    <input type="text" name="text" id="amount" class="form-control border-0 pl-0 text-center" style="background-color:transparent; direction:rtl;" disabled="" />
+
+                    <input type="hidden" id="minValue" name="min" value="0" />
+                    <input type="hidden" id="maxValue" name="max" value="0" />
+                    <input type="hidden" id="page" name="page" value="1" />
+                    <input type="hidden" id="order" name="order" value="0" />
+                    <input type="submit" class="btn btn-danger"style="background-color: #ed1e24; border-color: #d41c22;" value="اعمال فیلتر قیمت" />
+                </form>
+            </div>*@
+            <div class="col-lg-8">
+                <h3 class="mb-3 h6 text-uppercase text-black d-block" style="margin-left:30px;">Sorting</h3>
+                <button type="button" class="btn btn-outline-primary btn-md dropdown-toggle px-4" id="dropdownMenuReference"
+                        data-toggle="dropdown">
+                    Based on
+                </button>
+                <div class="dropdown-menu text-left" style="margin-left:-22px;" aria-labelledby="dropdownMenuReference">
+                    <a class="dropdown-item" href="/Orders/Shopping?page=1&order=1" id="alphabet">Alphabetical Order</a>
+                    <a class="dropdown-item" href="/Orders/Shopping?page=1&order=2" id="alphabetdesc">Reversed Alphabetical Order</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/Orders/Shopping?page=1&order=3" id="lowtohigh">Price, Low to High</a>
+                    <a class="dropdown-item" href="/Orders/Shopping?page=1&order=4" id="hightolow">Price, High to Low</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row text-center" id="homeContent">
+            @*<a href="~/Goods/GoodsDetails?code=">1</a>*@
+
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-6 col-lg-3 text-center item mb-3 daroo">
+
+                    <a href="~/Goods/GoodsDetails?code=@item.Code" title="@item.LatinName"> <img src="/Content/images/@item.PicAddress" alt="@item.LatinName"></a>
+                    <h3 class="text-dark"><a href="~/Goods/GoodsDetails?code=@item.Code">@item.LatinName</a></h3>
+                    @if (item.CatId > 1)
+                    {
+                        <p class="price"> € @item.Price.ToString("N2")</p>
+                    }
+                </div>
+            }
+
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-12 text-center">
+                <div class="site-block-27">
+
+                    <div class="text-center">
+                        <div class="pagedList text-center" style="align-content:center; margin-right:25%;">
+                            @Html.PagedListPager(Model, page => Url.Action("Shopping", new { page, order = ViewBag.SortOrder, id = ViewBag.Id }),
+                                     PagedListRenderOptions.ClassicPlusFirstAndLast)
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    
+}
